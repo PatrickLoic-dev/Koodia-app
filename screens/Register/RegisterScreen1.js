@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import RegisterNumber from './screens/Register/RegisterScreen1';
 
-export default function App() {
+export default function RegisterNumber() {
   return (
-    <RegisterNumber></RegisterNumber>
+    <View style={styles.container}>
+      <StatusBar style="auto" />
+      
+    </View>
   );
 }
 
