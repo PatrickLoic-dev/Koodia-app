@@ -10,7 +10,7 @@ export default function PersonnalInfoScreen() {
     return (
         <View style={styles.container}>
             <StatusBar style="auto" />
-            <View style={styles.RegisterNumberScreen}>
+            <View style={styles.PersonnalInfoScreen}>
                 <Text style={{ fontSize: 28 }}>Votre nom et prenom</Text>
                 <Text style={{ fontSize: 14, marginTop: 16, color: '#33363F', opacity: 0.7 }}>Renseigner les champs suivant tel que sur votre document d’identification national.</Text>
 
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
     },
 
-    RegisterNumberScreen: {
+    PersonnalInfoScreen: {
         display: 'flex',
         flexDirection: 'column',
         paddingTop: 56,
