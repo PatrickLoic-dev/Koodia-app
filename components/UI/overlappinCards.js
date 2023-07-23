@@ -34,88 +34,112 @@ const OverlappingCardsAnimation = () => {
   });
 
   return (
-      <View>
-        <Animated.View
-          style={{
-            width: 268.78, height: 300,
-            position: 'absolute',
-            top: -48,
-            left: 32,
-            borderRadius: 32,
-            backgroundColor: colors[(currentIndex + 2) % 3],
-            zIndex: 1,
-            transform: [
-              { translateY: cardsStackedAnim.interpolate({
+    <View>
+      <Animated.View
+        style={{
+          width: 268.78, height: 300,
+          position: 'absolute',
+          top: -48,
+          left: 32,
+          borderRadius: 32,
+          backgroundColor: colors[(currentIndex + 2) % 3],
+          zIndex: 1,
+          transform: [
+            {
+              translateY: cardsStackedAnim.interpolate({
                 inputRange: [0, 1],
                 outputRange: [40, 20],
-              })},
-              { scale: cardsStackedAnim.interpolate({
+              })
+            },
+            {
+              scale: cardsStackedAnim.interpolate({
                 inputRange: [0, 1],
                 outputRange: [0.8, 0.9],
-              })},
-            ],
-            opacity: cardsStackedAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0.3, 0.6],
-            }),
-          }}
-        />
-        <Animated.View
-          style={{
-            width: 332, height: 374.912,
-            position: 'absolute',
-            top: -0,
-            left: 2,
-            borderRadius: 32,
-            backgroundColor: colors[(currentIndex + 1) % 3],
-            zIndex: 2,
-            transform: [
-              { translateY: cardsStackedAnim.interpolate({
+              })
+            },
+          ],
+          opacity: cardsStackedAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0.3, 0.6],
+          }),
+        }}
+        >
+           <Text>Laurine</Text>
+        </Animated.View>
+
+
+      <Animated.View
+        style={{
+          width: 332, height: 374.912,
+          position: 'absolute',
+          top: -0,
+          left: 2,
+          borderRadius: 32,
+          backgroundColor: colors[(currentIndex + 1) % 3],
+          zIndex: 2,
+          transform: [
+            {
+              translateY: cardsStackedAnim.interpolate({
                 inputRange: [0, 1],
                 outputRange: [20, 0],
-              })},
-              { scale: cardsStackedAnim.interpolate({
+              })
+            },
+            {
+              scale: cardsStackedAnim.interpolate({
                 inputRange: [0, 1],
                 outputRange: [0.9, 1.0],
-              })},
-            ],
-            opacity: cardsStackedAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [0.6, 1],
-            }),
-          }}
-        />
-        <Animated.View
-          {...cardsPanResponder.panHandlers}
-          style={{
-            width: 338, height: 428,
-            position: 'absolute',
-            top: 60,
-            left: -4,
-            borderRadius: 32,
-            backgroundColor: colors[currentIndex % 3],
-            zIndex: cardsStackedAnim.interpolate({
-              inputRange: [0, 0.5, 1],
-              outputRange: [3, 2, 0],
-            }),
-            transform: [
-              { translateX: cardsPan.x },
-              { translateY: cardsStackedAnim.interpolate({
+              })
+            },
+          ],
+          opacity: cardsStackedAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0.6, 1],
+          }),
+        }}
+        >
+          <Text>Anita</Text>
+        </Animated.View>
+
+
+      <Animated.View
+        {...cardsPanResponder.panHandlers}
+        style={{
+          width: 338, height: 428,
+          position: 'absolute',
+          top: 60,
+          left: -4,
+          borderRadius: 32,
+          backgroundColor: colors[currentIndex % 3],
+          zIndex: cardsStackedAnim.interpolate({
+            inputRange: [0, 0.5, 1],
+            outputRange: [3, 2, 0],
+          }),
+          transform: [
+            { translateX: cardsPan.x },
+            {
+              translateY: cardsStackedAnim.interpolate({
                 inputRange: [0, 1],
                 outputRange: [0, 40],
-              })},
-              { scale: cardsStackedAnim.interpolate({
+              })
+            },
+            {
+              scale: cardsStackedAnim.interpolate({
                 inputRange: [0, 1],
                 outputRange: [1, 0.8],
-              })},
-            ],
-            opacity: cardsStackedAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [1, 0.3],
-            }),
-          }}
-        />
-      </View>
+              })
+            },
+          ],
+          opacity: cardsStackedAnim.interpolate({
+            inputRange: [0, 1],
+            outputRange: [1, 0.3],
+          }),
+        }}
+      >
+        <Text>Albert</Text>
+      </Animated.View>
+
+
+    </View>
   );
 };
 

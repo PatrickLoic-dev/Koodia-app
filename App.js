@@ -5,10 +5,11 @@ import OTPRegisterScreen from './screens/Register/RegisterScreen2';
 import ResidenceScreen from './screens/Register/RegisterScreen3';
 import PersonnalInfoScreen from './screens/Register/RegisterScreen4';
 import HomeScreen from './screens/HomeScreen';
+import ProductsScreen from './screens/ProductsScreen';
 
 export default function App() {
   return (
-    <HomeScreen></HomeScreen>
+    <ProductsScreen></ProductsScreen>
   );
 }
 
