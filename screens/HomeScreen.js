@@ -29,7 +29,7 @@ export default function HomeScreen() {
                 </View>
 
                 <View>
-                    
+                    <OverlappingCardsAnimation></OverlappingCardsAnimation>
                 </View>
             </View>
         </View>
