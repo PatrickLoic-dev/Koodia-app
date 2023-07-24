@@ -6,10 +6,11 @@ import ResidenceScreen from './screens/Register/RegisterScreen3';
 import PersonnalInfoScreen from './screens/Register/RegisterScreen4';
 import HomeScreen from './screens/HomeScreen';
 import ProductsScreen from './screens/ProductsScreen';
+import Overlay from './components/UI/overlay';
 
 export default function App() {
   return (
-    <ProductsScreen></ProductsScreen>
+    <Overlay></Overlay>
   );
 }
 
