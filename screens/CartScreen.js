@@ -1,10 +1,9 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, TouchableOpacity, View, Button } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native';
 import { Image } from 'expo-image';
-import NumericInput from 'react-native-numeric-input';
 import * as Font from 'expo-font';
 import { useState } from "react";
-import { ScrollView } from 'react-native-gesture-handler';
+
 
 
 
