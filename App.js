@@ -11,6 +11,7 @@ import ProductsScreen from './screens/Products/ProductsScreen';
 import ProductsDetails from './screens/Products/ProductDetailsScreen';
 import Overlay from './components/UI/overlay';
 import Cart from './screens/CartScreen';
+import OnBoardingScreen from './screens/OnboardingScreen/OnboardingScreen';
 
 export default function App() {
   const RootStack = createStackNavigator();
@@ -19,6 +20,7 @@ export default function App() {
     <NavigationContainer>
       <RootStack.Navigator>
         <RootStack.Group>
+        < RootStack.Screen name="OnBoardingScreen" component={OnBoardingScreen} options={{headerShown: false}} />
           <RootStack.Screen name="ProductsScreen" component={ProductsScreen} options={{headerShown: false}} />
           < RootStack.Screen name="ProductsDetailsScreen" component={ProductsDetails} options={{headerShown: false}} />
           < RootStack.Screen name="CartScreen" component={Cart} options={{headerShown: false}} />

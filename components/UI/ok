@@ -1,0 +1,1 @@
+  <TouchableOpacity style = {{height: 80, width: 80, backgroundColor: "#02005E", borderRadius: 100, justifyContent: 'center', alignItems: 'center', marginLeft : 160}}><Image source = {require('../../assets/icons/arrow_right.svg')} style = {{height : 32, width: 32}}/></TouchableOpacity>
