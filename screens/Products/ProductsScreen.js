@@ -15,7 +15,7 @@ export default function ProductsScreen({ type, navigation }) {
         <View style={styles.container}>
             <StatusBar style="auto" />
             <ScrollView style={styles.ProductsScreen}>
-                <TouchableOpacity style={{ display: 'flex', alignItems: 'flex-end' }}>
+                <TouchableOpacity style={{ display: 'flex', alignItems: 'flex-end' }} onPress={() => navigation.navigate('CartScreen')}>
                     <Image source={require('../../assets/icons/cart.svg')} style={{ height: 24, width: 24 }} />
                 </TouchableOpacity>
 
@@ -141,7 +141,7 @@ export default function ProductsScreen({ type, navigation }) {
 
 
                 <View style={{ marginTop: 24, display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-                    <Text style={{ fontSize: 20, color: '#02005E', fontWeight: 700 }}>Articles recommandés </Text>
+                    <Text style={{ fontSize: 20, color: '#02005E', fontWeight: 700 }}>Articles en promotion </Text>
                     <TouchableOpacity style={{ padingVertical: 8, paddingRight: 8, paddingLeft: 8, borderWidth: 1, borderRadius: 12, borderColor: '#D2CCF9', backgroundColor: '#F0EEFD' }}><Text>Voir tous</Text></TouchableOpacity>
                 </View>
 

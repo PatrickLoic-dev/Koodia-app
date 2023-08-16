@@ -7,7 +7,7 @@ import { useState } from "react";
 
 
 
-export default function Cart() {
+export default function Cart({navigation}) {
 
     const fetchFonts = () => {
         return Font.loadAsync({
@@ -16,158 +16,100 @@ export default function Cart() {
         });
     };
 
+    fetchFonts();
 
     return (
         <View styles={styles.container}>
             <StatusBar style="auto" />
             <View style={styles.ProductsDetailsScreen}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={() => navigation.goBack()}>
                         <Image source={require('../assets/icons/arrow_left.svg')} style={{ height: 33, width: 33, marginLeft: 5 }} />
                     </TouchableOpacity>
-                    <Text style={{ fontSize: 24, fontWeight: 700 }}>Votre Cadis</Text>
+                    <Text style={{ fontSize: 32, fontWeight: 700, marginLeft: 40 }}>Votre Panier</Text>
                 </View>
 
                 <ScrollView>
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center',  backgroundColor: '#FFF', height: 120, justifyContent: 'center', width : 330, borderRadius: 16, marginLeft : 16, marginTop: 8, borderWidth : 1, borderColor : '#D2CCF9'}}>
                         <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
                             <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
                         </View>
 
-                        <View style={{ marginTop: 17 }}>
+                        <View style={{ marginTop: 4, }}>
                             <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
-                            <Text style = {{fontSize : 12, marginTop: 8, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}>Savourez l'excellence avec notre côte de bœuf fraîche, prête à griller pour une tendreté et un goût inégalés. Élevez vos repas avec cette pièce de qualité supérieure, offrant une expérience gastronomique à la fois juteuse et succulente.</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, }}>
-                                <Text style={{ fontSize: 16, color: "rgba(58, 53, 65, 0.87)", marginRight: 8 }}>1 X</Text>
+                            <Text style = {{fontSize : 12, marginTop: 4, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}> 1 pièce(s)</Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, backgroundColor: '#F4F4F4', width: 100, justifyContent:'center', borderRadius: 8}}>
                                 <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
                             </View>
                         </View>
 
-                        <TouchableOpacity style={{ marginLeft: 24 }}>
-                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, marginLeft: 8 }} />
-                        </TouchableOpacity>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
-                            <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
-                        </View>
-
-                        <View style={{ marginTop: 17 }}>
-                            <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
-                            <Text style = {{fontSize : 12, marginTop: 8, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}>Savourez l'excellence avec notre côte de bœuf fraîche, prête à griller pour une tendreté et un goût inégalés. Élevez vos repas avec cette pièce de qualité supérieure, offrant une expérience gastronomique à la fois juteuse et succulente.</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, }}>
-                                <Text style={{ fontSize: 16, color: "rgba(58, 53, 65, 0.87)", marginRight: 8 }}>1 X</Text>
-                                <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
-                            </View>
-                        </View>
-
-                        <TouchableOpacity style={{ marginLeft: 24 }}>
-                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, marginLeft: 8 }} />
-                        </TouchableOpacity>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
-                            <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
-                        </View>
-
-                        <View style={{ marginTop: 17 }}>
-                            <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
-                            <Text style = {{fontSize : 12, marginTop: 8, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}>Savourez l'excellence avec notre côte de bœuf fraîche, prête à griller pour une tendreté et un goût inégalés. Élevez vos repas avec cette pièce de qualité supérieure, offrant une expérience gastronomique à la fois juteuse et succulente.</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, }}>
-                                <Text style={{ fontSize: 16, color: "rgba(58, 53, 65, 0.87)", marginRight: 8 }}>1 X</Text>
-                                <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
-                            </View>
-                        </View>
-
-                        <TouchableOpacity style={{ marginLeft: 24 }}>
-                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, marginLeft: 8 }} />
-                        </TouchableOpacity>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
-                            <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
-                        </View>
-
-                        <View style={{ marginTop: 17 }}>
-                            <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
-                            <Text style = {{fontSize : 12, marginTop: 8, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}>Savourez l'excellence avec notre côte de bœuf fraîche, prête à griller pour une tendreté et un goût inégalés. Élevez vos repas avec cette pièce de qualité supérieure, offrant une expérience gastronomique à la fois juteuse et succulente.</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, }}>
-                                <Text style={{ fontSize: 16, color: "rgba(58, 53, 65, 0.87)", marginRight: 8 }}>1 X</Text>
-                                <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
-                            </View>
-                        </View>
-
-                        <TouchableOpacity style={{ marginLeft: 24 }}>
-                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, marginLeft: 8 }} />
-                        </TouchableOpacity>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
-                            <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
-                        </View>
-
-                        <View style={{ marginTop: 17 }}>
-                            <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
-                            <Text style = {{fontSize : 12, marginTop: 8, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}>Savourez l'excellence avec notre côte de bœuf fraîche, prête à griller pour une tendreté et un goût inégalés. Élevez vos repas avec cette pièce de qualité supérieure, offrant une expérience gastronomique à la fois juteuse et succulente.</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, }}>
-                                <Text style={{ fontSize: 16, color: "rgba(58, 53, 65, 0.87)", marginRight: 8 }}>1 X</Text>
-                                <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
-                            </View>
-                        </View>
-
-                        <TouchableOpacity style={{ marginLeft: 24 }}>
-                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, marginLeft: 8 }} />
-                        </TouchableOpacity>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
-                            <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
-                        </View>
-
-                        <View style={{ marginTop: 17 }}>
-                            <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
-                            <Text style = {{fontSize : 12, marginTop: 8, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}>Savourez l'excellence avec notre côte de bœuf fraîche, prête à griller pour une tendreté et un goût inégalés. Élevez vos repas avec cette pièce de qualité supérieure, offrant une expérience gastronomique à la fois juteuse et succulente.</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, }}>
-                                <Text style={{ fontSize: 16, color: "rgba(58, 53, 65, 0.87)", marginRight: 8 }}>1 X</Text>
-                                <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
-                            </View>
-                        </View>
-
-                        <TouchableOpacity style={{ marginLeft: 24 }}>
-                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, marginLeft: 8 }} />
-                        </TouchableOpacity>
-                    </TouchableOpacity>
-
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
-                            <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
-                        </View>
-
-                        <View style={{ marginTop: 17 }}>
-                            <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
-                            <Text style = {{fontSize : 12, marginTop: 8, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}>Savourez l'excellence avec notre côte de bœuf fraîche, prête à griller pour une tendreté et un goût inégalés. Élevez vos repas avec cette pièce de qualité supérieure, offrant une expérience gastronomique à la fois juteuse et succulente.</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, }}>
-                                <Text style={{ fontSize: 16, color: "rgba(58, 53, 65, 0.87)", marginRight: 8 }}>1 X</Text>
-                                <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
-                            </View>
-                        </View>
-
-                        <TouchableOpacity style={{ marginLeft: 24 }}>
-                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, marginLeft: 8 }} />
+                        <TouchableOpacity style={{  }}>
+                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, }} />
                         </TouchableOpacity>
                     </TouchableOpacity>
 
 
 
+                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center',  backgroundColor: '#FFF', height: 120, justifyContent: 'center', width : 330, borderRadius: 16, marginLeft : 16, marginTop: 8, borderWidth : 1, borderColor : '#D2CCF9'}}>
+                        <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
+                            <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
+                        </View>
+
+                        <View style={{ marginTop: 4, }}>
+                            <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
+                            <Text style = {{fontSize : 12, marginTop: 4, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}> 1 pièce(s)</Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, backgroundColor: '#F4F4F4', width: 100, justifyContent:'center', borderRadius: 8}}>
+                                <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
+                            </View>
+                        </View>
+
+                        <TouchableOpacity style={{  }}>
+                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, }} />
+                        </TouchableOpacity>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center',  backgroundColor: '#FFF', height: 120, justifyContent: 'center', width : 330, borderRadius: 16, marginLeft : 16, marginTop: 8, borderWidth : 1, borderColor : '#D2CCF9'}}>
+                        <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
+                            <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
+                        </View>
+
+                        <View style={{ marginTop: 4, }}>
+                            <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
+                            <Text style = {{fontSize : 12, marginTop: 4, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}> 1 pièce(s)</Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, backgroundColor: '#F4F4F4', width: 100, justifyContent:'center', borderRadius: 8}}>
+                                <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
+                            </View>
+                        </View>
+
+                        <TouchableOpacity style={{  }}>
+                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, }} />
+                        </TouchableOpacity>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center',  backgroundColor: '#FFF', height: 120, justifyContent: 'center', width : 330, borderRadius: 16, marginLeft : 16, marginTop: 8, borderWidth : 1, borderColor : '#D2CCF9'}}>
+                        <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
+                            <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
+                        </View>
+
+                        <View style={{ marginTop: 4, }}>
+                            <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
+                            <Text style = {{fontSize : 12, marginTop: 4, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}> 1 pièce(s)</Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, backgroundColor: '#F4F4F4', width: 100, justifyContent:'center', borderRadius: 8}}>
+                                <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
+                            </View>
+                        </View>
+
+                        <TouchableOpacity style={{  }}>
+                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, }} />
+                        </TouchableOpacity>
+                    </TouchableOpacity>
+
+                    
 
 
-                    <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 12, paddingVertical: 8, backgroundColor: "#02005E", width: 328, height: 56, borderRadius: 16, marginBottom: 8, marginTop: 8, marginLeft: 24, alignItems: 'center' }}>
-                        <Text style={{ fontSize: 16, marginLeft: 4, color: "#FFF", fontWeight: 700 }}>Payer pour sa commande</Text>
+
+                    <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 12, paddingVertical: 8, backgroundColor: "#02005E", width: 338, height: 56, borderRadius: 16, marginBottom: 8, marginTop: 8, marginLeft: 16, alignItems: 'center' }}>
+                        <Text style={{ fontSize: 16, marginLeft: 4, color: "#FFF", fontWeight: 700 }}>10,0000 fcfa</Text>
                         <Image source={require('../assets/icons/bag.svg')} style={{ height: 24, width: 24 }} />
                     </TouchableOpacity>
                 </ScrollView>
@@ -186,7 +128,7 @@ const styles = StyleSheet.create({
 
     ProductsDetailsScreen: {
         display: 'flex',
-        backgroundColor: '#FFF',
+        backgroundColor: '#F4F4F4',
         flexDirection: 'column',
         paddingTop: 37,
         height: '100%'

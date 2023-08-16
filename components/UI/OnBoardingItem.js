@@ -9,7 +9,7 @@ export default onBoardingItem = ({item, scrollX }) =>{
 
      
         <View style = {{}}>
-            <View style = {{flexDirection: 'column', alignItems: 'center', width: 360}}>
+            <View style = {{flexDirection: 'column', alignItems: 'center', width: width}}>
                                 <Image source = {item.image} style= {{height: 260, width: 290, marginTop : 24}}></Image>
                                 <Text style = {{fontSize : 24, fontWeight : 800, textAlign : 'center', marginHorizontal : 16}}>{item.title}</Text>
                                 <Text style = {{fontSize : 14, textAlign : 'center', marginTop: 24, marginHorizontal : 32}}>{item.description}</Text>

@@ -20,8 +20,8 @@ export default function App() {
     <NavigationContainer>
       <RootStack.Navigator>
         <RootStack.Group>
-        < RootStack.Screen name="OnBoardingScreen" component={OnBoardingScreen} options={{headerShown: false}} />
           <RootStack.Screen name="ProductsScreen" component={ProductsScreen} options={{headerShown: false}} />
+        < RootStack.Screen name="OnBoardingScreen" component={OnBoardingScreen} options={{headerShown: false}} />
           < RootStack.Screen name="ProductsDetailsScreen" component={ProductsDetails} options={{headerShown: false}} />
           < RootStack.Screen name="CartScreen" component={Cart} options={{headerShown: false}} />
           <RootStack.Screen name="Home" component={HomeScreen} options={{headerShown: false}} />
