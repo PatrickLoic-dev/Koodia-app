@@ -5,10 +5,25 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import useFetch from '../../utils/Hooks/useFetch';
+import { useSelector } from 'react-redux';
+import { addToCart } from '../../utils/Redux/cartReducer';
+import { useDispatch } from 'react-redux';
 
 
 export default function ProductsScreen({ type, navigation }) {
     const { products, loading, error } = useFetch("/products?populate=*");
+    const data = useSelector((state) => state.cart.products)
+    const dispatch = useDispatch();
+
+    const areItemsPresent = () => {
+        let itemsPresent = false;
+        if (data.length >= 1) {
+            itemsPresent = true;
+        }
+        return itemsPresent 
+    }
+
+    const quan = 1;
 
 
     return (
@@ -16,7 +31,8 @@ export default function ProductsScreen({ type, navigation }) {
             <StatusBar style="auto" />
             <ScrollView style={styles.ProductsScreen}>
                 <TouchableOpacity style={{ display: 'flex', alignItems: 'flex-end' }} onPress={() => navigation.navigate('CartScreen')}>
-                    <Image source={require('../../assets/icons/cart.svg')} style={{ height: 24, width: 24 }} />
+                    <Image source={require('../../assets/icons/cart.svg')} style={{ height: 24, width: 24, marginRight: 24 }} />
+                    {areItemsPresent() && <View style={{ height: 10, width: 10, backgroundColor: '#FE5300', borderRadius: 24, position: 'absolute', top: 0, right: 12 }}></View>}
                 </TouchableOpacity>
 
                 <View style={{ marginTop: 22, display: 'flex', flexDirection: 'row', }}>
@@ -56,15 +72,23 @@ export default function ProductsScreen({ type, navigation }) {
 
                 <ScrollView horizontal style={{ marginTop: 18, height: 305 }}>
                     {loading ? <Text>Loading</Text> : products.map((item) => (
-                        <View style={{ height: 300, width: 248, borderRadius: 32, display: 'flex', flexDirection: 'column', backgroundColor: '#fff', marginRight: 12, borderWidth: 1, borderColor: "rgba(58, 53, 65, 0.20)", paddingHorizontal: 10 }} key={item.id}>
-                            <TouchableOpacity onPress={() =>{navigation.navigate('ProductsDetailsScreen', {id: item.id})}}><Image source={"http://192.168.43.85:1337" + item.attributes.Image.data.attributes.url} style={{ height: 186, width: 228, borderRadius: 32, marginTop: 12 }} /></TouchableOpacity>
-                            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
+                        <View style={{ height: 300, width: 248, borderRadius: 32, display: 'flex', flexDirection: 'column', backgroundColor: '#fff', marginRight: 12, borderWidth: 1, borderColor: "rgba(58, 53, 65, 0.20)", paddingHorizontal: 10, overflow: 'hidden' }} key={item.id}>
+                            <TouchableOpacity onPress={() => { navigation.navigate('ProductsDetailsScreen', { id: item.id }) }}><Image source={"http://192.168.43.85:1337" + item.attributes.Image.data.attributes.url} style={{ height: 186, width: 228, borderRadius: 32, marginTop: 12 }} /></TouchableOpacity>
+                            <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
                                 <View>
                                     <Text style={{ fontSize: 20, fontWeight: 700 }}>{item.attributes.productName}</Text>
                                     <Text style={{ fontSize: 16, color: '#666' }}>{item.attributes.weight}</Text>
                                     <Text style={{ fontSize: 20, color: '#FE5300' }}>{item.attributes.price} fcfa</Text>
                                 </View>
-                                <TouchableOpacity style={{ width: 53, height: 54, backgroundColor: '#F4F4F4', alignItems: 'center', justifyContent: 'center', borderRadius: 32, marginLeft: 96, padding: 16 }}><Image source={require('../../assets/icons/add.svg')} style={{ height: 21, width: 22, marginRight: 12, marginLeft: 12 }} /></TouchableOpacity>
+                                <TouchableOpacity style={{ width: 53, height: 54, backgroundColor: '#F4F4F4', alignItems: 'center', justifyContent: 'center', borderRadius: 32, padding: 16 }} onPress={() => dispatch(addToCart(
+                                    {
+                                        id: item.id,
+                                        title: item.attributes.productName,
+                                        description: item.attributes.description,
+                                        price: item.attributes.price,
+                                        image: item?.attributes?.Image?.data?.attributes?.url,
+                                        quantity : quan,
+                                    }))}><Image source={require('../../assets/icons/add.svg')} style={{ height: 21, width: 22, marginRight: 12, marginLeft: 12 }} /></TouchableOpacity>
                             </View>
                         </View>
                     ))}

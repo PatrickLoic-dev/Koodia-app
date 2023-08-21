@@ -3,11 +3,22 @@ import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-nati
 import { Image } from 'expo-image';
 import * as Font from 'expo-font';
 import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { removeItem } from '../utils/Redux/cartReducer';
 
 
 
 
-export default function Cart({navigation}) {
+export default function Cart({ navigation }) {
+
+    const products = useSelector(state => state.cart.products);
+    const totalPrice = () => {
+        let total = 0;
+        products.forEach(item => {
+            total += item.quantity * item.price;
+        });
+        return total
+    }
 
     const fetchFonts = () => {
         return Font.loadAsync({
@@ -15,6 +26,8 @@ export default function Cart({navigation}) {
             'ionicons': require('../assets/fonts/ionicons.ttf'),
         });
     };
+
+    const dispatch = useDispatch();
 
     fetchFonts();
 
@@ -30,86 +43,44 @@ export default function Cart({navigation}) {
                 </View>
 
                 <ScrollView>
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center',  backgroundColor: '#FFF', height: 120, justifyContent: 'center', width : 330, borderRadius: 16, marginLeft : 16, marginTop: 8, borderWidth : 1, borderColor : '#D2CCF9'}}>
-                        <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
-                            <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
-                        </View>
+                    {
+                        products?.map((item) => (
 
-                        <View style={{ marginTop: 4, }}>
-                            <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
-                            <Text style = {{fontSize : 12, marginTop: 4, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}> 1 pièce(s)</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, backgroundColor: '#F4F4F4', width: 100, justifyContent:'center', borderRadius: 8}}>
-                                <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
+                            <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFF', height: 120, justifyContent: 'center', width: 330, borderRadius: 16, marginLeft: 16, marginTop: 8, borderWidth: 1, borderColor: '#D2CCF9' }}>
+                                <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
+                                    <Image source={"http://192.168.43.85:1337" + item.image} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
+                                </View>
+
+                                <View style={{ marginTop: 4, }}>
+                                    <Text style={{ fontSize: 20, fontWeight: 700 }}>{item.title}</Text>
+                                    <Text style={{ fontSize: 12, marginTop: 4, fontFamily: 'Archivo-Medium', color: '#555655', width: 200 }}> {item.quantity} pièce(s)</Text>
+                                    <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, backgroundColor: '#F4F4F4', width: 100, justifyContent: 'center', borderRadius: 8 }}>
+                                        <Text style={{ fontSize: 20, color: "#FE5300" }}>{item.price} fcfa</Text>
+                                    </View>
+                                </View>
+
+                                <TouchableOpacity onPress={() => dispatch(removeItem(item.id))}>
+                                    <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, }} />
+                                </TouchableOpacity>
                             </View>
-                        </View>
-
-                        <TouchableOpacity style={{  }}>
-                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, }} />
-                        </TouchableOpacity>
-                    </TouchableOpacity>
 
 
 
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center',  backgroundColor: '#FFF', height: 120, justifyContent: 'center', width : 330, borderRadius: 16, marginLeft : 16, marginTop: 8, borderWidth : 1, borderColor : '#D2CCF9'}}>
-                        <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
-                            <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
-                        </View>
 
-                        <View style={{ marginTop: 4, }}>
-                            <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
-                            <Text style = {{fontSize : 12, marginTop: 4, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}> 1 pièce(s)</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, backgroundColor: '#F4F4F4', width: 100, justifyContent:'center', borderRadius: 8}}>
-                                <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
-                            </View>
-                        </View>
 
-                        <TouchableOpacity style={{  }}>
-                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, }} />
-                        </TouchableOpacity>
-                    </TouchableOpacity>
+                        ))
+                    }
 
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center',  backgroundColor: '#FFF', height: 120, justifyContent: 'center', width : 330, borderRadius: 16, marginLeft : 16, marginTop: 8, borderWidth : 1, borderColor : '#D2CCF9'}}>
-                        <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
-                            <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
-                        </View>
 
-                        <View style={{ marginTop: 4, }}>
-                            <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
-                            <Text style = {{fontSize : 12, marginTop: 4, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}> 1 pièce(s)</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, backgroundColor: '#F4F4F4', width: 100, justifyContent:'center', borderRadius: 8}}>
-                                <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
-                            </View>
-                        </View>
 
-                        <TouchableOpacity style={{  }}>
-                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, }} />
-                        </TouchableOpacity>
-                    </TouchableOpacity>
 
-                    <TouchableOpacity style={{ flexDirection: 'row', alignItems: 'center',  backgroundColor: '#FFF', height: 120, justifyContent: 'center', width : 330, borderRadius: 16, marginLeft : 16, marginTop: 8, borderWidth : 1, borderColor : '#D2CCF9'}}>
-                        <View style={{ paddingTop: 3, paddingLeft: 6, paddingRight: 5, paddingBottom: 5 }}>
-                            <Image source={require('../assets/images/boeuf.png')} style={{ height: 82, width: 78, borderRadius: 20 }}></Image>
-                        </View>
 
-                        <View style={{ marginTop: 4, }}>
-                            <Text style={{ fontSize: 20, fontWeight: 700 }}>Cotes de boeuf</Text>
-                            <Text style = {{fontSize : 12, marginTop: 4, fontFamily: 'Archivo-Medium', color : '#555655', width : 200}}> 1 pièce(s)</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8, backgroundColor: '#F4F4F4', width: 100, justifyContent:'center', borderRadius: 8}}>
-                                <Text style={{ fontSize: 20, color: "#FE5300" }}>2500 fcfa</Text>
-                            </View>
-                        </View>
 
-                        <TouchableOpacity style={{  }}>
-                            <Image source={require('../assets/icons/trash.svg')} style={{ height: 24, width: 20, }} />
-                        </TouchableOpacity>
-                    </TouchableOpacity>
-
-                    
 
 
 
                     <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 12, paddingVertical: 8, backgroundColor: "#02005E", width: 338, height: 56, borderRadius: 16, marginBottom: 8, marginTop: 8, marginLeft: 16, alignItems: 'center' }}>
-                        <Text style={{ fontSize: 16, marginLeft: 4, color: "#FFF", fontWeight: 700 }}>10,0000 fcfa</Text>
+                        <Text style={{ fontSize: 16, marginLeft: 4, color: "#FFF", fontWeight: 700 }}>{totalPrice()} fcfa</Text>
                         <Image source={require('../assets/icons/bag.svg')} style={{ height: 24, width: 24 }} />
                     </TouchableOpacity>
                 </ScrollView>

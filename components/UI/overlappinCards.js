@@ -1,141 +1,139 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Animated, PanResponder } from 'react-native';
+import { Image } from 'expo-image';
 
-const OverlappingCardsAnimation = () => {
-  const colors = ['#FFF', '#FFF', '#FFF '];
+const OverlappingCardsAnimation = ({ navigation }) => {
+  const colors = ['#FFF', '#FFF', '#FFF'];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const cardsPan = new Animated.ValueXY();
-  const cardsStackedAnim = new Animated.Value(0);
+  this.state = {
+    cardsPan: new Animated.ValueXY(),
+    cardsStackedAnim: new Animated.Value(0), // add this statement
+    currentIndex: 0, // and this to track card positions
+  }
 
-  const cardsPanResponder = PanResponder.create({
+
+
+  this.cardsPanResponder = useRef(PanResponder.create({
     onStartShouldSetPanResponder: () => true,
     onStartShouldSetPanResponderCapture: () => true,
     onMoveShouldSetPanResponder: () => true,
     onMoveShouldSetPanResponderCapture: () => true,
     onPanResponderMove: (event, gestureState) => {
-      cardsPan.setValue({ x: gestureState.dx, y: 0 });
+      this.state
+        .cardsPan
+        .setValue(
+          { x: gestureState.dx, y: this.state.cardsPan.y }
+        );
     },
     onPanResponderTerminationRequest: () => false,
     onPanResponderRelease: (event, gestureState) => {
-      Animated.spring(cardsPan, {
-        toValue: { x: 0, y: 0 },
+      Animated.timing(this.state.cardsPan, {
+        toValue: 0,
+        duration: 300,
         useNativeDriver: false,
       }).start();
-      Animated.spring(cardsStackedAnim, {
+      // will be used to interpolate values in each view
+      Animated.timing(this.state.cardsStackedAnim, {
         toValue: 1,
+        duration: 300,
         useNativeDriver: false,
       }).start(() => {
-        cardsStackedAnim.setValue(0);
-        setCurrentIndex((prevIndex) => prevIndex + 1);
+        // reset cardsStackedAnim's value to 0 when animation ends
+        this.state.cardsStackedAnim.setValue(0);
+
+        // increment card position when animation ends
+        this.setState({
+          currentIndex: this.state.currentIndex + 1,
+          useNativeDriver: false,
+        });
       });
     },
-  });
+  })).current;
+
+
 
   return (
     <View>
-      <Animated.View
+      <Animated.View    // last card
         style={{
-          width: 268.78, height: 300,
+          width: 315, height: 410,
           position: 'absolute',
-          top: -48,
-          left: 32,
-          borderRadius: 32,
-          backgroundColor: colors[(currentIndex + 2) % 3],
           zIndex: 1,
-          transform: [
-            {
-              translateY: cardsStackedAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [40, 20],
-              })
-            },
-            {
-              scale: cardsStackedAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0.8, 0.9],
-              })
-            },
-          ],
-          opacity: cardsStackedAnim.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0.3, 0.6],
-          }),
-        }}
-        >
-           <Text>Laurine</Text>
-        </Animated.View>
-
-
-      <Animated.View
-        style={{
-          width: 332, height: 374.912,
-          position: 'absolute',
-          top: -0,
-          left: 2,
+          bottom: 40,
+          top: -5,
+          left: 8,
+          alignItems: 'center',
           borderRadius: 32,
-          backgroundColor: colors[(currentIndex + 1) % 3],
+          backgroundColor: colors[(this.state.currentIndex + 2) % 3],
+          zIndex: 1,
+          backgroundColor: colors[2],
+          opacity: 0.3,
+          transform: [{ scale: 0.80 }],
+        }} >
+
+      </Animated.View>
+
+
+
+
+      <Animated.View    // second card
+        style={{
+          width: 315, height: 410,
+          position: 'absolute',
           zIndex: 2,
-          transform: [
-            {
-              translateY: cardsStackedAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [20, 0],
-              })
-            },
-            {
-              scale: cardsStackedAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0.9, 1.0],
-              })
-            },
-          ],
-          opacity: cardsStackedAnim.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0.6, 1],
-          }),
-        }}
-        >
-          <Text>Anita</Text>
-        </Animated.View>
-
-
-      <Animated.View
-        {...cardsPanResponder.panHandlers}
-        style={{
-          width: 338, height: 428,
-          position: 'absolute',
-          top: 60,
-          left: -4,
+          bottom: 20,
+          top: 25,
+          left: 8,
+          alignItems: 'center',
           borderRadius: 32,
-          backgroundColor: colors[currentIndex % 3],
-          zIndex: cardsStackedAnim.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [3, 2, 0],
-          }),
-          transform: [
-            { translateX: cardsPan.x },
-            {
-              translateY: cardsStackedAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [0, 40],
-              })
-            },
-            {
-              scale: cardsStackedAnim.interpolate({
-                inputRange: [0, 1],
-                outputRange: [1, 0.8],
-              })
-            },
-          ],
-          opacity: cardsStackedAnim.interpolate({
-            inputRange: [0, 1],
-            outputRange: [1, 0.3],
-          }),
-        }}
-      >
-        <Text>Albert</Text>
+          backgroundColor: colors[(this.state.currentIndex + 1) % 3],
+          zIndex: 2,
+          backgroundColor: colors[1],
+          opacity: 0.6,
+          transform: [{ scale: 0.90 }],
+        }}>
+
+      </Animated.View>
+
+
+      <Animated.View  // frontmost card
+       
+        style={{
+          width: 315,
+          height: 420,
+          position: 'absolute',
+          zIndex: 3,
+          bottom: 0,
+          padding: 24,
+          top: 60,
+          left: 8,
+          borderRadius: 32,
+          backgroundColor: colors[0], // Blue
+          opacity: 1,
+          transform: [{ scale: 1.0 }],
+        }} >
+        <View style={{ height: 32, width: 32, backgroundColor: '#FE5300', borderRadius: 16, padding: 8 }}>
+          <Image source={require('../../assets/icons/Widget_light.svg')} style={{ height: 16, width: 16 }} />
+        </View>
+
+        <Text style={{ fontSize: 24, fontWeight: 700, marginTop: 8 }}>Actions Rapides</Text>
+
+        <TouchableOpacity style={{ height: 140, width: 270, backgroundColor: 'rgba(254, 83, 0, 0.12)', marginTop: 12, borderRadius: 24, padding: 12 }} onPress={() => navigation.navigate('ProductsScreen')}>
+          <View style={{ height: 40, width: 32, backgroundColor: '#FE5300', borderRadius: 16, paddingHorizontal: 8, paddingVertical: 12 }}>
+            <Image source={require('../../assets/icons/Buy.svg')} style={{ height: 16, width: 16 }} />
+          </View>
+          <Text style={{ fontSize: 14, marginTop: 24, fontWeight: 600, color: '#FE5300' }}>Effectuer une course</Text>
+          <Text style={{ fontSize: 12, marginTop: 12, color: '#FE5300' }}>Faites vous livrer votre course à domicile</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={{ height: 140, width: 270, backgroundColor: 'rgba(254, 83, 0, 0.12)', marginTop: 12, borderRadius: 24, padding: 12 }}>
+          <View style={{ height: 40, width: 32, backgroundColor: '#FE5300', borderRadius: 16, paddingHorizontal: 8, paddingVertical: 12 }}>
+            <Image source={require('../../assets/icons/Headphone.svg')} style={{ height: 16, width: 16 }} />
+          </View>
+          <Text style={{ fontSize: 14, marginTop: 24, fontWeight: 600, color: '#FE5300' }}>Commander un repas</Text>
+          <Text style={{ fontSize: 12, marginTop: 12, color: '#FE5300' }}>Faites vous livrer votre repas à domicile</Text>
+        </TouchableOpacity>
       </Animated.View>
 
 
